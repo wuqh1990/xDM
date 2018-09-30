@@ -1,4 +1,6 @@
-﻿namespace xDM
+﻿using XXDM.Helper;
+using static XXDM.Helper.DmHelper;
+namespace xDM
 {
     public interface IxDm
     {
@@ -11,12 +13,26 @@
         /// <summary>
         /// 程序开始计时
         /// </summary>
-        void StartTime();
+        void StartRunTime();
+
+        /// <summary>
+        /// 停止程序计时
+        /// </summary>
+        void StopRunTime();
 
         /// <summary>
         /// 显示时间
         /// </summary>
-        void ShowTime();
+        void ShowRunTime();
+        
+
+        int MoveTo(MouseEnum mouseClick, int x, int y);
+
+        int FindWindow(string class_name, string title_name, int isBind = 1);
+
+        int FindWindowEx(int parent, string class_name, string title_name, int isBind = 1);
+
+        #region old
 
         string Ver();
 
@@ -336,7 +352,7 @@
 
         int BindWindow(int hwnd, string display, string mouse, string keypad, int mode);
 
-        int FindWindow(string class_name, string title_name, int isBind = 1);
+
 
         int GetScreenDepth();
 
@@ -348,7 +364,7 @@
 
         int GetOsType();
 
-        int FindWindowEx(int parent, string class_name, string title_name, int isBind = 1);
+
 
         int SetExportDict(int index, string dict_name);
 
@@ -795,5 +811,7 @@
         string GetRealPath(string path);
 
         int ShowTaskBarIcon(int hwnd, int is_show);
+
+        #endregion
     }
 }
