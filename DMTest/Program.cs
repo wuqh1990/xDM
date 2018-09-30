@@ -13,7 +13,7 @@ namespace DMTest
         {
             xDm dm = new xDm();
 
-            dm.ConLog(dm.Reg("注册码", ""));
+            dm.ConLog(dm.Reg("自己的注册码", ""));
 
             dm.StartTime();
 
