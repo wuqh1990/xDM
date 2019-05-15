@@ -41,9 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DM\dm.cs" />
-    <Compile Include="DM\IDM.cs" />
     <Compile Include="Helper\DmHelper.cs" />
-    <Compile Include="MyDM\IxDm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MyDM\xDm.cs" />
   </ItemGroup>

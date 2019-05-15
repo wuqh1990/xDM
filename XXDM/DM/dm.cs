@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 
 namespace xDM
 {
-    public partial class dmsoft : IDM
+    public partial class dmsoft
     {
         private Type obj = null;
         private object obj_object = null;

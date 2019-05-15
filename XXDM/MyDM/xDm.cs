@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading;
+
 using XXDM.Helper;
 
 namespace xDM
 {
-
-    public class xDm : IxDm
+    public class xDm
     {
         private static dmsoft dm = new dmsoft();
 
@@ -48,7 +47,6 @@ namespace xDM
         {
             Console.WriteLine($"\n**************程序的 运行时间 ：{sw.Elapsed} **************\n");
         }
-
 
         #region XXXX
 
@@ -101,9 +99,7 @@ namespace xDM
         /// <returns></returns>
         public int FindStr(int x1, int y1, int x2, int y2, string str, string color, double sim, out int x, out int y)
         {
-
             return dm.FindStr(x1, y1, x2, y2, str, color, sim, out x, out y);
-
         }
 
         /// <summary>
@@ -293,7 +289,7 @@ namespace xDM
             return dm.LeftUp();
         }
 
-        /// <summary> 
+        /// <summary>
         /// 按住鼠标右键
         /// </summary>
         /// <returns></returns>
@@ -498,7 +494,6 @@ namespace xDM
         public int FindColor(int x1, int y1, int x2, int y2, string color, double sim, int dir, out int x, out int y)
         {
             return dm.FindColor(x1, y1, x2, y2, color, sim, dir, out x, out y);
-
         }
 
         /// <summary>
@@ -598,7 +593,6 @@ namespace xDM
         public int GetWordResultPos(string str, int index, out int x, out int y)
         {
             return dm.GetWordResultPos(str, index, out x, out y);
-
         }
 
         /// <summary>
@@ -660,9 +654,7 @@ namespace xDM
         /// <returns></returns>
         public int GetClientSize(int hwnd, out int width, out int height)
         {
-
             return dm.GetClientSize(hwnd, out width, out height);
-
         }
 
         /// <summary>
@@ -865,28 +857,27 @@ namespace xDM
             #region 说明
 
             /*
-             
+
              取值定义如下
 
-                0 : 关闭指定窗口                
-                1 : 激活指定窗口                
-                2 : 最小化指定窗口,但不激活                
-                3 : 最小化指定窗口,并释放内存,但同时也会激活窗口.                
-                4 : 最大化指定窗口,同时激活窗口.                
-                5 : 恢复指定窗口 ,但不激活                
-                6 : 隐藏指定窗口                
-                7 : 显示指定窗口                
-                8 : 置顶指定窗口                
-                9 : 取消置顶指定窗口                
-                10 : 禁止指定窗口                
-                11 : 取消禁止指定窗口                
+                0 : 关闭指定窗口
+                1 : 激活指定窗口
+                2 : 最小化指定窗口,但不激活
+                3 : 最小化指定窗口,并释放内存,但同时也会激活窗口.
+                4 : 最大化指定窗口,同时激活窗口.
+                5 : 恢复指定窗口 ,但不激活
+                6 : 隐藏指定窗口
+                7 : 显示指定窗口
+                8 : 置顶指定窗口
+                9 : 取消置顶指定窗口
+                10 : 禁止指定窗口
+                11 : 取消禁止指定窗口
                 12 : 恢复并激活指定窗口
                 13 : 强制结束窗口所在进程
 
-             
              */
 
-            #endregion
+            #endregion 说明
 
             return dm.SetWindowState(hwnd, flag);
         }
@@ -1340,11 +1331,7 @@ namespace xDM
         /// <returns>返回找到的图片的序号</returns>
         public int FindPic(int x1, int y1, int x2, int y2, string pic_name, string delta_color, double sim, int dir, out int x, out int y)
         {
-
             return dm.FindPic(x1, y1, x2, y2, pic_name, delta_color, sim, dir, out x, out y);
-
-
-
         }
 
         /// <summary>
@@ -1964,10 +1951,7 @@ namespace xDM
         public int GetCursorPos(out int x, out int y)
         {
             return dm.GetCursorPos(out x, out y);
-
         }
-
-
 
         /// <summary>
         /// 绑定指定的窗口
@@ -1978,7 +1962,6 @@ namespace xDM
         {
             //BindWindow(hwnd, "normal", "windows", "windows", 0);
             return BindWindow(hwnd, "normal", "normal", "normal", 0);
-
         }
 
         /// <summary>
@@ -2071,7 +2054,6 @@ namespace xDM
                 BindWindow(hwnd);
             }
             return hwnd;
-
         }
 
         /// <summary>
@@ -2264,7 +2246,6 @@ namespace xDM
         public int FindStrWithFont(int x1, int y1, int x2, int y2, string str, string color, double sim, string font_name, int font_size, int flag, out int x, out int y)
         {
             return dm.FindStrWithFont(x1, y1, x2, y2, str, color, sim, font_name, font_size, flag, out x, out y);
-
         }
 
         /// <summary>
@@ -2435,7 +2416,6 @@ namespace xDM
         public int FindStrFast(int x1, int y1, int x2, int y2, string str, string color, double sim, out int x, out int y)
         {
             return dm.FindStrFast(x1, y1, x2, y2, str, color, sim, out x, out y);
-
         }
 
         /// <summary>
@@ -2805,7 +2785,6 @@ namespace xDM
         public int FindPicMem(int x1, int y1, int x2, int y2, string pic_info, string delta_color, double sim, int dir, out int x, out int y)
         {
             return dm.FindPicMem(x1, y1, x2, y2, pic_info, delta_color, sim, dir, out x, out y);
-
         }
 
         /// <summary>
@@ -3261,7 +3240,6 @@ namespace xDM
         public int FindShape(int x1, int y1, int x2, int y2, string offset_color, double sim, int dir, out int x, out int y)
         {
             return dm.FindShape(x1, y1, x2, y2, offset_color, sim, dir, out x, out y);
-
         }
 
         /// <summary>
@@ -3312,7 +3290,6 @@ namespace xDM
         public string FindStrS(int x1, int y1, int x2, int y2, string str, string color, double sim, out int x, out int y)
         {
             return dm.FindStrS(x1, y1, x2, y2, str, color, sim, out x, out y);
-
         }
 
         /// <summary>
@@ -3347,7 +3324,6 @@ namespace xDM
         public string FindStrFastS(int x1, int y1, int x2, int y2, string str, string color, double sim, out int x, out int y)
         {
             return dm.FindStrFastS(x1, y1, x2, y2, str, color, sim, out x, out y);
-
         }
 
         /// <summary>
@@ -3383,7 +3359,6 @@ namespace xDM
         public string FindPicS(int x1, int y1, int x2, int y2, string pic_name, string delta_color, double sim, int dir, out int x, out int y)
         {
             return dm.FindPicS(x1, y1, x2, y2, pic_name, delta_color, sim, dir, out x, out y);
-
         }
 
         /// <summary>
@@ -3638,7 +3613,7 @@ namespace xDM
             //dm.SetPath "c:\test_game"
             //TracePrint dm.IsFileExist("123.txt")
 
-            #endregion
+            #endregion 说明
 
             return dm.IsFileExist(file_);
         }
@@ -3659,10 +3634,10 @@ namespace xDM
                 // 相对路径
                 dm.SetPath "c:\test_game"
                 dm.DeleteFile "123.txt"
-             
+
              */
 
-            #endregion
+            #endregion 说明
 
             return dm.DeleteFile(file_);
         }
@@ -3680,14 +3655,14 @@ namespace xDM
             /*
             // 绝对路径
                 dm.MoveFile "c:\123.txt","d:\456.txt"
-                
+
                 // 相对路径
                 dm.SetPath "c:\test_game"
                 dm.MoveFile "123.txt","456.txt"
-             
+
              */
 
-            #endregion
+            #endregion 说明
 
             return dm.MoveFile(src_file, dst_file);
         }
@@ -3788,14 +3763,11 @@ namespace xDM
             return dm.EnableIme(en);
         }
 
-
-
-
         /// <summary>
-        ///
+        /// 注册
         /// </summary>
-        /// <param name="code"></param>
-        /// <param name="ver"></param>
+        /// <param name="code">自己的注册码</param>
+        /// <param name="ver">版本号,可为空</param>
         /// <returns></returns>
         public string Reg(string code, string ver)
         {
@@ -3806,18 +3778,23 @@ namespace xDM
                 case 0:
                     msg = "失败(未知错误)";
                     break;
+
                 case 1:
-                    msg = "成功";
+                    msg = "注册成功";
                     break;
+
                 case 2:
                     msg = "余额不足";
                     break;
+
                 case 3:
                     msg = "绑定了本机器，但是账户余额不足50元.";
                     break;
+
                 case 4:
                     msg = "注册码错误";
                     break;
+
                 case 5:
                     msg = "你的机器或者IP在黑名单列表中或者不在白名单列表中.";
                     break;
@@ -3825,12 +3802,15 @@ namespace xDM
                 case -1:
                     msg = "无法连接网络,(可能防火墙拦截, 如果可以正常访问大漠插件网站，那就可以肯定是被防火墙拦截)";
                     break;
+
                 case -2:
                     msg = "进程没有以管理员方式运行. (出现在win7 vista 2008.建议关闭uac)";
                     break;
+
                 case -8:
                     msg = "版本附加信息长度超过了10";
                     break;
+
                 case -9:
                     msg = "版本附加信息里包含了非法字母.";
                     break;
@@ -3982,8 +3962,6 @@ namespace xDM
         #endregion XXXX
 
         #region new
-
-
 
         public int KeyPress(int vk)
         {
@@ -4425,11 +4403,6 @@ namespace xDM
             return dm.ShowTaskBarIcon(hwnd, is_show);
         }
 
-        #endregion
+        #endregion new
     }
-
-
-
-
-
 }
