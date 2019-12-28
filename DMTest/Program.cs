@@ -1,32 +1,43 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using xDM;
-
-using XXDM.Helper;
+using XXDM.MyDM;
 
 namespace DMTest
 {
     internal class Program
     {
-        private static xDm dm = new xDm();
+        private static XDm dm = new XDm();
+        private static Colors colors = new Colors();
+        /// <summary>
+        /// 游戏窗口句柄
+        /// </summary>
+        private static readonly int Hwnd = dm.FindWindow("", "");
 
         private static void Main(string[] args)
         {
-            dm.ConLog(dm.Reg("自己的注册码", ""));
-
-            dm.StartRunTime();
-
-            Task.Run(() =>
-            {
-                dm.ConLog("开始执行...");
-                RunCode();
-                dm.ConLog("执行完毕...");
-                dm.ShowRunTime();
-            });
 
             Console.ReadLine();
+            //dm.ConLog(dm.Reg("", ""));//收费版  记得先注册
+            dm.StartRunTime();
+
+            //设置游戏分辨率
+            dm.SetWindowSize(Hwnd, dm.GameWindowsSize[0], dm.GameWindowsSize[1]);
+
+            var mainTask = Task.Run(() =>
+              {
+                  dm.ConLog("开始执行...");
+
+                  RunCode();
+
+                  dm.ConLog("执行完毕...");
+                  dm.ShowRunTime();
+              });
+
+            Task.WaitAny(mainTask);
             dm.StopRunTime();
+            Console.ReadLine();
         }
 
         /// <summary>
@@ -34,15 +45,28 @@ namespace DMTest
         /// </summary>
         public static void RunCode()
         {
-            //鼠标移动到 1,3 并点击鼠标左键
-            dm.MoveTo(DmHelper.MouseEnum.鼠标左键, 1, 3);
-            dm.ConLog("调用成功");
-            //寻找微信窗口
-            int i = dm.FindWindow("WeChatMainWndForPC", "");
+            dm.ConLog(Hwnd);
+           
+          
+        
+            if (dm.Find(colors.城镇_展开箭头按钮, true))
+            {
+                dm.delay(2000);
+                dm.Find(colors.城镇_修行按钮, true);
 
-            dm.ShowRunTime();
+                dm.delay(2000);
 
-            dm.ConLog("WeChat窗口: " + i);
+                dm.Find(colors.修行界面_关闭状态, true);
+
+                Console.WriteLine("ok");
+            }
+            else
+            {
+                Console.WriteLine("no");
+            }
+
+       
+
         }
     }
 }
