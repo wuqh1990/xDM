@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 
-namespace xDM
+namespace XXDM.DM
 {
     public partial class dmsoft
     {

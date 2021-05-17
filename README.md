@@ -28,3 +28,12 @@ https://gitee.com/xxxxue/xDM/tree/dev
 
 > 使用免费版  或者  填写 注册码  后  再运行
 
+## 赞赏
+
+如果这个开源项目 可以帮助到你,  你也可以请作者喝一杯咖啡。
+
+![](http://xxxxue.gitee.io/important/aliPay.png)
+
+![](http://xxxxue.gitee.io/important/wxPay.png)
+
+
