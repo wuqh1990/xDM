@@ -2,12 +2,6 @@
 
 > c# 使用大漠插件. 完成 类似 按键精灵的 功能. 方法 注释 正在慢慢的 完善中
 
-# 仓库
-## github
-https://github.com/xxxxue/xDM
-## 码云
-https://gitee.com/xxxxue/xDM/tree/dev
-
 # 准备
 1. 运行需要 .NET Framework 4.7.2  或者 手动把 类库框架版本改为 自己有的版本
 
@@ -28,12 +22,9 @@ https://gitee.com/xxxxue/xDM/tree/dev
 
 > 使用免费版  或者  填写 注册码  后  再运行
 
-## 赞赏
+## 支持作者
 
 如果这个开源项目 可以帮助到你,  你也可以请作者喝一杯咖啡。
 
-![](http://xxxxue.gitee.io/important/aliPay.png)
-
-![](http://xxxxue.gitee.io/important/wxPay.png)
-
+![pay](img.assets/pay.png)
 
