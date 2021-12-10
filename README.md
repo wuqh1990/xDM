@@ -26,7 +26,6 @@ static void Main(string[] args)
     }
 
     // 你的初始化dm代码
-
 }
 
 ```
@@ -46,4 +45,16 @@ static void Main(string[] args)
 如果这个开源项目 可以帮助到你,  你也可以请作者喝一杯咖啡。
 
 ![pay](img.assets/pay.png)
+
+
+
+
+
+# 大漠免注册
+
+
+
+![image-20211210154016527](img.assets/image-20211210154016527.png)
+
+
 
