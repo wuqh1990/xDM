@@ -1,19 +1,48 @@
 # xDM
 
-> c# 使用大漠插件. 完成 类似 按键精灵的 功能.
+> c# / c++ 使用大漠插件. 完成 类似 按键精灵的 功能.
+
+
+
+# !!注意
+
+低版本的大漠只能用32位的程序调用,
+
+(最新的高版本应该可以64位,  暂时没试过)
+
+
+
+现在新建C#和C++的程序, 
+
+可能都是默认64位了. 
+
+所以要手动修改程序的目标平台为x86.
+
+
 
 # 效果图
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190515155237435.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM3MjE0NTY3,size_16,color_FFFFFF,t_70)
 
 
 
 # 免注册大漠
 
+把dm.dll放在项目中, 直接使用,无需其他操作
 
 
-[C#免注册大漠, 免注册调用com组件类_韩俊俊的博客-CSDN博客_免注册调用](https://blog.csdn.net/black_bad1993/article/details/53906335)
 
-[Visual C++ 免注册调用大漠插件_一株禾的博客-CSDN博客](https://blog.csdn.net/chuhe163/article/details/112745590)
+[C# 免注册大漠, 免注册调用com组件类_韩俊俊的博客-CSDN博客](https://blog.csdn.net/black_bad1993/article/details/53906335)
+
+[VC++ 免注册调用大漠插件_一株禾的博客-CSDN博客](https://blog.csdn.net/chuhe163/article/details/112745590)
+
+
+
+> (3.1235+) 高版本的大漠也可以用官方提供的DmReg.dll  调用 SetDllPathA  进行注册 
+
+
+
+
 
 
 
