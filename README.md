@@ -97,19 +97,12 @@ static void Main(string[] args)
 
 > 使用免费版  或者  填写 注册码  后  再运行
 
+# 小实战
 
+[https://github.com/xxxxue/war3-72bian](https://github.com/xxxxue/war3-72bian) : 只用到了一点点大漠 (其实代码中 windows api 可以替换成大漠的实现)
 
 # 支持作者
 
 如果这个开源项目 可以帮助到你,  你也可以请作者喝一杯咖啡。
 
 ![pay](img.assets/pay.png)
-
-
-
-
-
-
-
-
-
