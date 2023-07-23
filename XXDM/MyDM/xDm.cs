@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading;
 
@@ -83,7 +85,7 @@ namespace XXDM.MyDM
         /// <summary>
         /// 区域多点找色
         /// </summary>
-        /// <param name="colorInfo">例子:  string 城镇展开箭头按钮 ="645,48,789,97,add3ad-111111,-5|-6|a5cfa5-111111,-4|6|a5c7a5-111111";</param>
+        /// <param name="colorInfo">例子:  string 城镇展开箭头按钮 ="城镇_展开箭头按钮,645,48,789,97,add3ad-111111,-5|-6|a5cfa5-111111,-4|6|a5c7a5-111111";</param>
         /// <returns>Result对象</returns>
         public Result Find(string colorInfo)
         {
@@ -127,15 +129,15 @@ namespace XXDM.MyDM
 
 
             dm.delay(1000);
-            string pngName = $@"C:\Users\xxxue.000\Desktop\sdpng\{DateTime.Now.ToString("yyyyMMdd-HH-mm-ss-fff")}.png";
+            string pngPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, $"{DateTime.Now.ToString("yyyyMMdd-HH-mm-ss-fff")}.png");
             dm.Capture(
                 Convert.ToInt32(color[1]),
                 Convert.ToInt32(color[2]),
                 Convert.ToInt32(color[3]),
                 Convert.ToInt32(color[4]),
-                pngName);
+                pngPath);
 
-            Console.WriteLine("Debug: " + color[0] + "  [截图完成] " + colorInfo);
+            Console.WriteLine("Debug: " + color[0] + "  [截图完成] " + colorInfo + "  位置:" + pngPath);
         }
 
         #endregion my
@@ -416,7 +418,7 @@ namespace XXDM.MyDM
                 if (mouseClick == EnumHelper.MouseEnum.鼠标左键)
                 {
                     i = i + LeftClick();
-                    
+
                 }
                 else if (mouseClick == EnumHelper.MouseEnum.鼠标右键)
                 {
@@ -2144,13 +2146,13 @@ namespace XXDM.MyDM
             int hwnd = dm.FindWindow(class_name, title_name);
             if (isBind == 1 && hwnd > 0)
             {
-                if (BindWindow(hwnd)==1)
+                if (BindWindow(hwnd) == 1)
                 {
-                    Console.WriteLine(hwnd+" 窗口绑定成功.");
+                    Console.WriteLine(hwnd + " 窗口绑定成功.");
                 }
                 else
                 {
-                    Console.WriteLine(hwnd+" 窗口绑定失败.");
+                    Console.WriteLine(hwnd + " 窗口绑定失败.");
                     Console.ReadLine();
 
                 }
