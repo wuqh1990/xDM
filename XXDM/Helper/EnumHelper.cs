@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XXDM.Helper
 {
-   public class DmHelper
+   public class EnumHelper
     {
         #region 键码
 

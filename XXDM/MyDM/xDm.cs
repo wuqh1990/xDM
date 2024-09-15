@@ -1,17 +1,30 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Net.NetworkInformation;
+using System.Text;
 using System.Threading;
 
+using XXDM.DM;
 using XXDM.Helper;
+using XXDM.Model;
 
-namespace xDM
+namespace XXDM.MyDM
 {
-    public class xDm
+    public class XDm
     {
-        private static dmsoft dm = new dmsoft();
-
+        private dmsoft dm = new dmsoft();
         //程序运行时间
-        private static Stopwatch sw = new Stopwatch();
+        private Stopwatch sw = new Stopwatch();
+
+        public XDm()
+        {
+            ConLog("大漠版本: " + dm.Ver());
+        }
+        /// <summary>
+        /// 游戏窗口大小
+        /// </summary>
+        public int[] GameWindowsSize = { 1280, 772 };
 
         /// <summary>
         /// 控制台 输出msg
@@ -47,6 +60,87 @@ namespace xDM
         {
             Console.WriteLine($"\n**************程序的 运行时间 ：{sw.Elapsed} **************\n");
         }
+
+        #region my
+
+        /// <summary>
+        /// 区域多点找色 (可点击)
+        /// </summary>
+        /// <param name="colorInfo">例子:  string 城镇展开箭头按钮 ="645,48,789,97,add3ad-111111,-5|-6|a5cfa5-111111,-4|6|a5c7a5-111111";</param>
+        /// <param name="isClick">是否单击</param>
+        /// <returns>找图判定结果</returns>
+        public bool Find(string colorInfo, bool isClick = false)
+        {
+            Result res = Find(colorInfo);
+
+            if (isClick && res.Success && res.X > 0 && res.Y > 0)
+            {
+                MoveTo(EnumHelper.MouseEnum.鼠标左键, res.X, res.Y);
+
+            }
+
+            return res.Success;
+        }
+
+        /// <summary>
+        /// 区域多点找色
+        /// </summary>
+        /// <param name="colorInfo">例子:  string 城镇展开箭头按钮 ="城镇_展开箭头按钮,645,48,789,97,add3ad-111111,-5|-6|a5cfa5-111111,-4|6|a5c7a5-111111";</param>
+        /// <returns>Result对象</returns>
+        public Result Find(string colorInfo)
+        {
+            string[] color = colorInfo.Split(',');
+            StringBuilder offsetColor = new StringBuilder();
+            for (int i = 6; i < color.Length; i++)
+            {
+                offsetColor.Append("," + color[i]);
+            }
+
+            int res = dm.FindMultiColor(
+                Convert.ToInt32(color[1]),
+                Convert.ToInt32(color[2]),
+                Convert.ToInt32(color[3]),
+                Convert.ToInt32(color[4]),
+                color[5],
+                offsetColor.ToString().Trim(','),
+                0.8, 1, out int x, out int y);
+
+            if (res == 1 && x > 0 && y > 0)
+            {
+                Console.WriteLine("XDm.Find: " + color[0] + $"  {x} , {y} ");
+            }
+            else
+            {
+                Console.WriteLine("XDm.Find: " + color[0] + $" [未找到] ");
+                KeepPng(colorInfo);
+            }
+
+            return new Result()
+            {
+                Success = (res == 1),
+                X = x,
+                Y = y
+            };
+        }
+
+        public void KeepPng(string colorInfo)
+        {
+            string[] color = colorInfo.Split(',');
+
+
+            dm.delay(1000);
+            string pngPath = Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, $"{DateTime.Now.ToString("yyyyMMdd-HH-mm-ss-fff")}.png");
+            dm.Capture(
+                Convert.ToInt32(color[1]),
+                Convert.ToInt32(color[2]),
+                Convert.ToInt32(color[3]),
+                Convert.ToInt32(color[4]),
+                pngPath);
+
+            Console.WriteLine("Debug: " + color[0] + "  [截图完成] " + colorInfo + "  位置:" + pngPath);
+        }
+
+        #endregion my
 
         #region XXXX
 
@@ -210,7 +304,7 @@ namespace xDM
         /// </summary>
         /// <param name="vk">虚拟按键码</param>
         /// <returns>0:失败1:成功</returns>
-        public int KeyPress(DmHelper.KeyCode vk)
+        public int KeyPress(EnumHelper.KeyCode vk)
         {
             return dm.KeyPress((int)vk);
         }
@@ -220,7 +314,7 @@ namespace xDM
         /// </summary>
         /// <param name="vk">虚拟按键码</param>
         /// <returns></returns>
-        public int KeyDown(DmHelper.KeyCode vk)
+        public int KeyDown(EnumHelper.KeyCode vk)
         {
             return dm.KeyDown((int)vk);
         }
@@ -230,7 +324,7 @@ namespace xDM
         /// </summary>
         /// <param name="vk">虚拟按键码</param>
         /// <returns></returns>
-        public int KeyUp(DmHelper.KeyCode vk)
+        public int KeyUp(EnumHelper.KeyCode vk)
         {
             return dm.KeyUp((int)vk);
         }
@@ -314,18 +408,19 @@ namespace xDM
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <returns></returns>
-        public int MoveTo(DmHelper.MouseEnum mouseClick, int x, int y)
+        public int MoveTo(EnumHelper.MouseEnum mouseClick, int x, int y)
         {
             int i = dm.MoveTo(x, y);
             if (i > 0)
             {
                 Sleep(200);
 
-                if (mouseClick == DmHelper.MouseEnum.鼠标左键)
+                if (mouseClick == EnumHelper.MouseEnum.鼠标左键)
                 {
                     i = i + LeftClick();
+
                 }
-                else if (mouseClick == DmHelper.MouseEnum.鼠标右键)
+                else if (mouseClick == EnumHelper.MouseEnum.鼠标右键)
                 {
                     i = i + RightClick();
                 }
@@ -2009,7 +2104,7 @@ namespace xDM
              keypad 字符串: 键盘仿真模式 取值有以下几种
              "normal" : 正常模式,平常我们用的前台键盘模式
              "windows": Windows模式,采取模拟windows消息方式 同按键的后台插件.
-             "dx": dx模式,采用模拟dx后台键盘模式。有些窗口在此模式下绑定时，需要先激活窗口再绑定(或者绑定以后激活)，否则可能会出现绑定后键盘无效的情况. 此模式等同于BindWindowEx中的keypad为以下组合
+             "dx": dx模式。有些窗口在此模式下绑定时，需要先激活窗口再绑定(或者绑定以后激活)，否则可能会出现绑定后键盘无效的情况. 此模式等同于BindWindowEx中的keypad为以下组合
              "dx.public  .active.api|dx.public  .active.message| dx.keypad.state.api|dx.keypad.api|dx.keypad.input.lock.api"
              注意此模式需要管理员权限
              mode 整形数: 模式。 取值有以下两种
@@ -2051,7 +2146,16 @@ namespace xDM
             int hwnd = dm.FindWindow(class_name, title_name);
             if (isBind == 1 && hwnd > 0)
             {
-                BindWindow(hwnd);
+                if (BindWindow(hwnd) == 1)
+                {
+                    Console.WriteLine(hwnd + " 窗口绑定成功.");
+                }
+                else
+                {
+                    Console.WriteLine(hwnd + " 窗口绑定失败.");
+                    Console.ReadLine();
+
+                }
             }
             return hwnd;
         }
@@ -4000,7 +4104,11 @@ namespace xDM
 
         public int delay(int mis)
         {
-            return dm.delay(mis);
+            if (dm.delay(mis) == 0)
+            {
+                Sleep(mis);
+            }
+            return 1;
         }
 
         public string FindIntEx(int hwnd, string addr_range, long int_value_min, long int_value_max, int tpe, int steps, int multi_thread, int mode)
